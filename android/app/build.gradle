@@ -1,3 +1,32 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.example.votre_app" // Conservez votre namespace / applicationId
+    compileSdk 34 // Mettez votre version de compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.example.votre_app"
+        minSdk 21
+        targetSdk 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug // ou votre clé release
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -22,8 +51,6 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 android {
     compileSdkVersion 34
 
