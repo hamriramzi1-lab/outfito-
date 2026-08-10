@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'screens/dressing_screen.dart';
+import 'screens/suggestions_screen.dart';
+import 'screens/planning_screen.dart';
+import 'screens/profil_screen.dart';
 
 void main() {
   runApp(const OutfitoApp());
@@ -30,14 +34,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
+  final List<Widget> _screens = const [
+    DressingScreen(),
+    SuggestionsScreen(),
+    PlanningScreen(),
+    ProfilScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _selectedIndex == 0
-            ? const Text('👕 Mon Dressing', style: TextStyle(fontSize: 24))
-            : const Text('🤖 Suggestions', style: TextStyle(fontSize: 24)),
-      ),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
@@ -46,10 +53,22 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.checkroom), label: 'Dressing'),
-          BottomNavigationBarItem(icon: Icon(Icons.auto_awesome), label: 'Suggestions'),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: 'Planning'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.checkroom),
+            label: 'Dressing',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.auto_awesome),
+            label: 'Suggestions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Planning',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
         ],
       ),
     );
