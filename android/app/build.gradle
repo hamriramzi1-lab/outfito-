@@ -1,30 +1,7 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
+    id "org.jetbrains.kotlin.android"
     id "dev.flutter.flutter-gradle-plugin"
-}
-
-android {
-    namespace "com.example.votre_app" // Conservez votre namespace / applicationId
-    compileSdk 34 // Mettez votre version de compileSdkVersion
-
-    defaultConfig {
-        applicationId "com.example.votre_app"
-        minSdk 21
-        targetSdk 34
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.debug // ou votre clé release
-        }
-    }
-}
-
-flutter {
-    source '../..'
 }
 
 def localProperties = new Properties()
@@ -33,11 +10,6 @@ if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
         localProperties.load(reader)
     }
-}
-
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new FileNotFoundException("Flutter SDK not found")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -50,19 +22,23 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
 android {
-    compileSdkVersion 34
+    namespace "com.outfito.app"
+    compileSdk 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     defaultConfig {
         applicationId "com.outfito.app"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
